@@ -113,3 +113,14 @@ not(puedeIncorporarse(Grupo, Persona, _)).
 
 % Punto 7 
 
+puedenTocar(Grupo) :-
+    grupo(Grupo, bigBand),
+    tieneBuenaBase(Grupo),
+    findall(Persona, ((integrante(Grupo, Persona, Instrumento), esDeViento(Instrumento))), Personas),
+    length(Personas, CantidadDePersonas), 
+    CantidadDePersonas >= 5.
+
+puedenTocar(Grupo) :-
+grupo(Grupo, formacion(Instrumentos)),
+forall(member(Instrumento, Instrumentos), alguienTocaEseInstrumento(Grupo, Instrumento)).
+
