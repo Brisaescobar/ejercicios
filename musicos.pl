@@ -146,7 +146,7 @@ inivitadosPor(UnaPersona, OtraPersona) :-
     invito(UnaPersona, TerceraPersona), 
     inivitadosPor(TerceraPersona, OtraPersona).
 
-cantidadDeInvitados(Invitado, Cantidad) :-
-    findall(Invitado, inivitadosPor(Persona,OtraPersona), Invitados),
+cantidadDeInvitados(Persona, Cantidad) :-
+    findall(OtraPersona, inivitadosPor(Persona,OtraPersona), Invitados),
     length(Invitados, Cantidad).
-    
+
