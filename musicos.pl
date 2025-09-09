@@ -103,19 +103,23 @@ puede usarse con distintos tipos de terminos */
 /* los terminos que hacen que sea polimorfico es recital, 
    tambien hay logica repetida y se podria expresar de otra forma
 */
-recital(Anio, Tipo).
+% recital(Anio, Tipo).
 costo(Teatro, Costo).
 cantidadGente(Anio, Festival, Escenario, Cantidad).
 
+recital(2024, estadio(oldBoys, 30000, 30)).
+recital(2024, teatro(granRes)).
+recital(2024, festival(locaPaliza, eshnaider, 2)).
+recital(2025, festival(locaPaliza, brava, 1)).
+
 recaudacion(Anio, Recaudado):-
     recital(Anio, Tipo), 
-    recaudadoSegunTipo(Anio, Tipo, Monto).
+    recaudadoSegunTipo(Anio, Tipo, Recaudado).
 
-recaudadoSegunTipo(_, estadio(_, CantidadDeGente, PrecioDeEntrada), Monto) :-
+recaudadoSegunTipo(_, estadio(Anio, CantidadDeGente, PrecioDeEntrada), Monto) :-
     Monto is CantidadDeGente * PrecioDeEntrada.
 
 recaudadoSegunTipo(_, teatro(granRes), 10000).
-
 
 recaudadoSegunTipo(_, teatro(Teatro), Monto) :-
     costo(Teatro, Costo),
@@ -140,7 +144,7 @@ invito(emiliaViernes, cuqui).
 invito(marioBecerro, gRey).
 
 inivitadosPor(UnaPersona, OtraPersona) :-
-    invito(Persona, OtraPersona).
+    invito(UnaPersona, OtraPersona).
 
 inivitadosPor(UnaPersona, OtraPersona) :-
     invito(UnaPersona, TerceraPersona), 
